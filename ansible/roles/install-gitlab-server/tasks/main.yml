@@ -11,7 +11,7 @@
   become: true
   community.docker.docker_container:
     name: gitlab
-    hostname: gitlab_domain_name
+    hostname: "{{gitlab_domain_name}}"
     image: gitlab/gitlab-ce:latest
     volumes:
       - /srv/gitlab/config:/etc/gitlab
