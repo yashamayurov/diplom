@@ -3,7 +3,7 @@
 acme_email: yakov@mayurov.ru
 domain_name: mayurov.ru
 www_root: /var/www/html
-gitlab_ip: 10.0.0.4
+#gitlab_ip: 10.0.0.4
 subdomains:
   - {hostname: "{{ domain_name }}", url: "{{app_server_ip}}", port: 80}
   - {hostname: "grafana.{{ domain_name }}",url: "{{ monitoring_ip }}", port: 3000}

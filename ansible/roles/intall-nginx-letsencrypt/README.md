@@ -1,38 +1,44 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+intall-nginx-letsencrypt
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Операционная система: Ubuntu не ниже 18.04 LTS
+
+Роль производит установку nginx, утилиты letsencrypt.
+
+Производится настройка nginx: доавляются сайты, включается работы по протоколу https, получение сертификата letencrypt 
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Следующие переменные могут быть переопределены:
 
-Dependencies
-------------
+- **acme_email:** e-mail Администратора сайта
+- **domain_name:** имя корневого домена
+- **www_root:** корневая директория сайтов
+- **subdomains:** Список upstream для сайтов, пример:
+```yaml
+subdomains:  
+  - {hostname: "{{ domain_name }}", url: "{{app_server_ip}}", port: 80}
+  - {hostname: "grafana.{{ domain_name }}",url: "{{ monitoring_ip }}", port: 3000}
+  - {hostname: "gitlab.{{ domain_name }}", url: "{{gitlab_ip}}", port: 80}
+  - {hostname: "alertmanager.{{ domain_name }}", url: "{{ monitoring_ip }}", port: 9093}
+  - {hostname: "prometheus.{{ domain_name }}", url: "{{ monitoring_ip }}", port: 9090}
+```
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
-
-Example Playbook
-----------------
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
-
-License
--------
-
-BSD
-
+```yaml
+- name: Install Nginx and letsencrypt
+  hosts: nginx_servers
+  roles: 
+    - { role: intall-nginx-letsencrypt }
+```
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Iakov Maiurov

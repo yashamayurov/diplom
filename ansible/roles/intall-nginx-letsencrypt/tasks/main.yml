@@ -7,9 +7,9 @@
     state: latest
     update_cache: yes
   loop: "{{ packages }}"
-#- name: run letsencrypt
-#  become: true
-#  shell: "letsencrypt certonly -n --webroot -w {{ www_root }} -m {{ acme_email }} --agree-tos -d {{ domain_name }} -d alertmanager.{{ domain_name }} -d prometheus.{{ domain_name }} -d grafana.{{ domain_name }} -d gitlab.{{ domain_name }}"
+- name: run letsencrypt
+  become: true
+  shell: "letsencrypt certonly -n --webroot -w {{ www_root }} -m {{ acme_email }} --agree-tos -d {{ domain_name }} -d alertmanager.{{ domain_name }} -d prometheus.{{ domain_name }} -d grafana.{{ domain_name }} -d gitlab.{{ domain_name }}"
 - name: copy default nginx config
   become: true
   template:
