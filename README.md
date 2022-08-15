@@ -77,3 +77,7 @@ deploy-stage:
   rules:
   - if: ($CI_COMMIT_TAG =~ /^release.*/) # Условие выполнения - тег коммита содержит слово "release"
 ```
+Для демонстрации работоспособности pipeline внес изменения в файл index.php, делающие wordpress неработоспособным, создал коммит, добавил тег "release_bad". 
+Скриншоты изменений "до и после":
+![before commit](./images/good_site.png)
+![after commit](./images/fail_site.png)
