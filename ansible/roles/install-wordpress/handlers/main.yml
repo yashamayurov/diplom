@@ -1,0 +1,7 @@
+---
+# handlers file for install-wordpress
+- name: Restart Nginx             # Перезапуск nginx
+  become: true
+  service:
+    name: nginx
+    state: restarted

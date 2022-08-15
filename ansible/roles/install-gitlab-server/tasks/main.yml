@@ -1,0 +1,23 @@
+---
+# tasks file for install-gitlab-server
+- name: install docker packeges
+  become: true
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+  loop: "{{ gitlab_packages }}"
+- name: run docker image Gitlab
+  become: true
+  community.docker.docker_container:
+    name: gitlab
+    hostname: gitlab_domain_name
+    image: gitlab/gitlab-ce:latest
+    volumes:
+      - /srv/gitlab/config:/etc/gitlab
+      - /srv/gitlab/logs:/var/log/gitlab
+      - /srv/gitlab/data:/var/opt/gitlab
+    ports:
+      - "1022:22"
+      - "80:80"
+      - "4567:4567"

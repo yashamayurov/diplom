@@ -1,0 +1,12 @@
+---
+# defaults file for intall-nginx-letsencrypt
+acme_email: yakov@mayurov.ru
+domain_name: mayurov.ru
+www_root: /var/www/html
+gitlab_ip: 10.0.0.4
+subdomains:
+  - {hostname: "{{ domain_name }}", url: "{{app_server_ip}}", port: 80}
+  - {hostname: "grafana.{{ domain_name }}",url: "{{ monitoring_ip }}", port: 3000}
+  - {hostname: "gitlab.{{ domain_name }}", url: "{{gitlab_ip}}", port: 80}
+  - {hostname: "alertmanager.{{ domain_name }}", url: "{{ monitoring_ip }}", port: 9093}
+  - {hostname: "prometheus.{{ domain_name }}", url: "{{ monitoring_ip }}", port: 9090}

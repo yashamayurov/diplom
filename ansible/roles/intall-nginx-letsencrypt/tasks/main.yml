@@ -1,0 +1,35 @@
+---
+# tasks file for intall-nginx-letsencrypt
+- name: Install Packages
+  become: true
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+  loop: "{{ packages }}"
+#- name: run letsencrypt
+#  become: true
+#  shell: "letsencrypt certonly -n --webroot -w {{ www_root }} -m {{ acme_email }} --agree-tos -d {{ domain_name }} -d alertmanager.{{ domain_name }} -d prometheus.{{ domain_name }} -d grafana.{{ domain_name }} -d gitlab.{{ domain_name }}"
+- name: copy default nginx config
+  become: true
+  template:
+    src: templates/default.conf
+    dest: /etc/nginx/sites-available/default
+- name: copy config
+  become: true
+  template:
+    src: templates/nginx.conf.j2
+    dest: /etc/nginx/sites-available/{{ item.hostname }}
+  loop: "{{ subdomains }}"
+- name: Enable new site
+  become: true
+  file:
+    src: /etc/nginx/sites-available/{{ item.hostname }}
+    dest: /etc/nginx/sites-enabled/{{ item.hostname }}
+    state: link
+  loop: "{{ subdomains }}"
+- name: Restart Nginx
+  become: true
+  service:
+    name: nginx
+    state: restarted

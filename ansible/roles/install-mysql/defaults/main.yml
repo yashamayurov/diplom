@@ -1,0 +1,10 @@
+---
+# defaults file for install-mysql
+mysql_slave_user: slave_user
+mysql_slave_password: 123IklA098
+#host_master: mysql1
+mysql_wp_database: wordpress
+mysql_wp_user: wordpress
+mysql_wp_password: wordpress
+#mysql_slave_ip: not
+mysql_master: not

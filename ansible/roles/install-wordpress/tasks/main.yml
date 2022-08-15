@@ -1,0 +1,43 @@
+---
+# tasks file for install-wordpress
+- name: Add repository for PHP      # Добавление репозитория PHP
+  become: true
+  ansible.builtin.apt_repository:
+    repo: 'ppa:ondrej/php'
+- name: Install Packages            # Установка веб-сервера и пакетов php
+  become: true
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+  loop: "{{ wp_packages }}"
+- name: Download Wordpress        # Загрузка дистрибутива Wordpress
+  ansible.builtin.get_url:   
+    url: "{{ wp_get_url }}"
+    dest: /tmp
+- name: Extract Wordpress         # Извлечение файлов дистрибутиву в директорию сайта
+  become: true
+  ansible.builtin.unarchive:
+    remote_src: true
+    src: "/tmp/{{ wp_archive_name }}"
+    dest: "{{ wp_root_dir }}"
+- name: set dir riths             # Установление прав на директории и файлы Wordpress
+  become: true
+  ansible.builtin.file:
+    path: "{{ wp_root_dir }}/wordpress"
+    owner: root
+    group: root
+    mode: '777'
+    recurse: true
+- name: copy nginx config          # Загрузка конфиграции nginx
+  become: true
+  ansible.builtin.template:
+    src: templates/wp-nginx/default.j2
+    dest: /etc/nginx/sites-available/default
+  notify: Restart Nginx
+- name: copy site config          # Загрузка конфиграции nginx
+  become: true
+  ansible.builtin.template:
+    src: templates/wp-config.j2
+    dest: "{{ wp_root_dir }}/wordpress/wp-config.php"
+    force: true

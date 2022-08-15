@@ -1,0 +1,7 @@
+nodeexporter_hosts:
+  - "{{mysql_master_ip}}:9100"
+  - "{{mysql_slave_ip}}:9100"
+  - "{{gitlab_ip}}:9100"
+  - "{{app_server_ip}}:9100"
+  - "{{monitoring_ip}}:9100"
+  - "{{nginx_ip}}:9100"

@@ -1,0 +1,5 @@
+---
+# vars file for install-gitlab-server
+gitlab_packages:          # Пакеты, необходимые для установки
+  - docker.io
+  - python3-docker

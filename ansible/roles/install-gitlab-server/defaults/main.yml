@@ -1,0 +1,3 @@
+---
+# defaults file for install-gitlab-server
+gitlab_domain_name: _not

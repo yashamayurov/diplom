@@ -1,0 +1,18 @@
+---
+# tasks file for install-gitlab-runner
+- name: Install gitlab runner           # Установка gitlab-runner для автоматиского деплоя обновлений в репозитория
+  become: true
+  ansible.builtin.apt:   
+    deb: "{{ gitlab_runner_url }}"
+- name: add gitlab-runner to sudo       # Добавление пользователя gitlab-runner в группу sudo
+  become: true
+  ansible.builtin.user:
+    name: gitlab-runner
+    groups: "sudo"
+    append: yes  
+- name: sudo without password for gitlab runner   # Разрешить пользователю gitlab-runner запуск sudo без ввода пароля 
+  become: true
+  copy:
+    content: 'gitlab-runner ALL=(ALL) NOPASSWD: ALL'
+    dest: /etc/sudoers.d/gitlab_runner_nopasswd
+    mode: 0440

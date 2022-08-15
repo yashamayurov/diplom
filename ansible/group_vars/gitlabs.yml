@@ -1,0 +1,2 @@
+---
+gitlab_domain_name: "gitlab.{{ domain_name }}"

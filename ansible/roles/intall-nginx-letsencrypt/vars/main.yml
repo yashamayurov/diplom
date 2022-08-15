@@ -1,0 +1,5 @@
+---
+# vars file for intall-nginx-letsencrypt
+packages:
+  - "nginx"
+  - "letsencrypt"
