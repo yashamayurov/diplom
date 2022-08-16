@@ -20,8 +20,7 @@ terraform {
 provider "yandex" {
   cloud_id  = "${var.cloud_id}"    
   folder_id = "${var.folder_id}"   
-  zone      = "ru-central1-a"
-  token     = "${var.token}"       
+  zone      = "ru-central1-a"  
 }
 
 resource "yandex_compute_image" "ubuntu-image" {
@@ -33,7 +32,7 @@ resource "yandex_compute_image" "nat-instance-image" {
   name       = "nat-instance"
   source_image = "fd8josjq21d56924jfan"
 }
-
+# Виртуальная машина с nginx и nat-instance
 resource "yandex_compute_instance" "nginx1" {
   name = "nginx"
   hostname = "nginx1"
@@ -61,7 +60,7 @@ resource "yandex_compute_instance" "nginx1" {
   }
   
 }
-
+# Виртуальные машины для mySql
 resource "yandex_compute_instance" "my-sql" {
   name = "db0${count.index}"
   hostname = "db0${count.index}"
@@ -88,7 +87,7 @@ resource "yandex_compute_instance" "my-sql" {
   }
   
 }
-
+# Виртуальная машина для работы Wordpress
 resource "yandex_compute_instance" "app" {
   name = "app"
   hostname = "app"
@@ -115,7 +114,7 @@ resource "yandex_compute_instance" "app" {
   }
   
 }
-
+# Виртуальная машина для установки Gitlab
 resource "yandex_compute_instance" "gitlab" {
   name = "gitlab"
   hostname = "gitlab"
@@ -142,7 +141,7 @@ resource "yandex_compute_instance" "gitlab" {
   }
   
 }
-
+# Виртуальная машина для установки сервисо мониторинга
 resource "yandex_compute_instance" "monitoring" {
   name = "monitoring"
   hostname = "monitoring"

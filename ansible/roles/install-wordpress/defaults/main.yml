@@ -3,3 +3,7 @@
 wp_archive_name: wordpress-6.0.1.tar.gz                     # Имя файла - дистрибутива Wordpress
 wp_get_url: "https://wordpress.org/{{ wp_archive_name }}"   # URL для скачивания дистрибутива Wordpress
 wp_root_dir: "/var/www/html"    # ДиректорияВ которой находится корневая директория сайта
+mysql_wp_database: wordpress
+mysql_wp_user: wordpress
+mysql_wp_password: wordpress
+mysql_host: 127.0.0.1

@@ -1,3 +1,4 @@
+# Формирование файла с переменными для ansible
 resource "local_file" "ansible_vars" {
   content         = <<-EOF
 # Ansible inventory containing variable values from Terraform.

@@ -1,12 +1,11 @@
-Role Name
+install-gitlab-server
 =========
 
-A brief description of the role goes here.
+Производит установку Docker и запуск докер контейнера **gitlab/gitlab-ce** содержащего Gitlab CE
 
 Requirements
 ------------
-
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Ubuntu 20.04
 
 Role Variables
 --------------
@@ -20,13 +19,12 @@ A list of other roles hosted on Galaxy should go here, plus any details in regar
 
 Example Playbook
 ----------------
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
-
+```yaml
+ - name: install Gitlab
+   hosts: gitlabs
+   roles:      
+     - { role: install-gitlab-server }
+```
 License
 -------
 
