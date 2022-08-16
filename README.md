@@ -8,6 +8,7 @@
 Ссылки на код:
 - [terrform](./terraform/)
 - [ansible](./ansible/)
+- [ansible-playbook](./ansible/site.yml)
 
 Скриншоты работающих сервисов:
 - [Сайт mayurov.ru](./images/good_site.png)
