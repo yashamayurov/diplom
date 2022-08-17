@@ -22,6 +22,11 @@
 
 ## 2. Создание инфраструктуры
 Terraform сконфигурирован. Ресурсы собраны.
+Для работы выбран workspace **stage**:
+```bash
+vagrant@vagrant:/vagrant/diplom/work/diploma/terraform$ terraform  workspace show
+stage
+```
 
 [Ссылка на код в репозитории](./terraform/)
 
